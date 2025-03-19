@@ -30,7 +30,12 @@
 - Makefile：简化常用命令
 
 ### windows按照make
+
 ```commandline
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 choco install make
 ```
+
+### 使用ruff做工程质量管理
+
+> https://github.com/astral-sh/ruff
