@@ -8,6 +8,6 @@ repos:
         language: system
         exclude: '^docs/|^tests/'
         types: [ python ]
-        stages: [ commit ]
+        stages: [ pre-commit ]
         pass_filenames: false
         args: [ ]
