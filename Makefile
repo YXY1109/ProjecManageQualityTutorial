@@ -1,78 +1,31 @@
-.DEFAULT_GOAL := help
+# 使用 isort 对导入语句排序：首先运行 isort，让导入语句的顺序更加规范。
+# 使用 black 格式化代码：接着使用 black 对整个代码文件进行格式化，确保代码风格一致。
+# 使用 mypy 进行类型检查：运行 mypy 来检查代码中的类型注解是否正确。
+# 使用 flake8 进行静态代码分析：最后使用 flake8 检查代码是否符合编码规范，以及是否存在其他潜在问
+VENV_DIR := venv
+PYTHON := $(VENV_DIR)\Scripts\python.exe
+PIP := $(VENV_DIR)\Scripts\pip.exe
+TEST := $(VENV_DIR)\Scripts\pytest.exe
+ISORT := $(VENV_DIR)\Scripts\isort.exe
+BLACK := $(VENV_DIR)\Scripts\black.exe
+MYPY := $(VENV_DIR)\Scripts\mypy.exe
+FLAKE8 := $(VENV_DIR)\Scripts\flake8.exe
 
-SHELL=/bin/bash
-VENV = venv
+# 运行测试
+test:
+    $(TEST)tests/  --cov=src/  --cov-report=term-missing
 
-# Detect the operating system and set the virtualenv bin directory
-ifeq ($(OS),Windows_NT)
-	VENV_BIN=$(VENV)/Scripts
-else
-	VENV_BIN=$(VENV)/bin
-endif
+# 代码格式化
+format:
+    $(ISORT) src/
+    $(BLACK) src/
 
-setup: $(VENV_BIN)/activate
+# 类型检查
+typecheck:
+    $(MYPY) src/
 
-.PHONY: fmt
-fmt: setup ## Format Python code
-	# Format code
-	$(VENV_BIN)/ruff format packages
-	$(VENV_BIN)/ruff format --exclude="examples/notebook" examples
-	$(VENV_BIN)/ruff format i18n
-	# Sort imports
-	$(VENV_BIN)/ruff check --select I --fix packages
-	$(VENV_BIN)/ruff check --select I --fix --exclude="examples/notebook" examples
-	$(VENV_BIN)/ruff check --select I --fix i18n
+# 静态分析
+lint:
+    $(FLAKE8) src/
 
-	$(VENV_BIN)/ruff check --fix packages \
-		--exclude="packages/dbgpt-serve/src/**"
-
-	$(VENV_BIN)/ruff check --fix packages/dbgpt-serve --ignore F811,F841
-
-	# Not need to check examples/notebook
-	#$(VENV_BIN)/ruff check --fix --exclude="examples/notebook" examples
-
-.PHONY: fmt-check
-fmt-check: setup ## Check Python code formatting and style without making changes
-	$(VENV_BIN)/ruff format --check packages
-	$(VENV_BIN)/ruff format --check --exclude="examples/notebook" examples
-	$(VENV_BIN)/ruff check --select I packages
-	$(VENV_BIN)/ruff check --select I --exclude="examples/notebook" examples
-	$(VENV_BIN)/ruff check --fix packages \
-		--exclude="packages/dbgpt-serve/src/**"
-
-	$(VENV_BIN)/ruff check --fix packages/dbgpt-serve --ignore F811,F841
-
-
-.PHONY: pre-commit
-pre-commit: fmt-check test test-doc mypy ## Run formatting and unit tests before committing
-
-test: $(VENV)/.testenv ## Run unit tests
-	$(VENV_BIN)/pytest dbgpt
-
-
-.PHONY: mypy
-mypy: $(VENV)/.testenv ## Run mypy checks
-	# https://github.com/python/mypy
-	$(VENV_BIN)/mypy --config-file .mypy.ini --ignore-missing-imports packages/dbgpt-core/
-	# $(VENV_BIN)/mypy --config-file .mypy.ini dbgpt/rag/ dbgpt/datasource/ dbgpt/client/ dbgpt/agent/ dbgpt/vis/ dbgpt/experimental/
-	# rag depends on core and storage, so we not need to check it again.
-	# $(VENV_BIN)/mypy --config-file .mypy.ini dbgpt/storage/
-	# $(VENV_BIN)/mypy --config-file .mypy.ini dbgpt/core/
-	# TODO: More package checks with mypy.
-
-.PHONY: coverage
-coverage: setup ## Run tests and report coverage
-	$(VENV_BIN)/pytest dbgpt --cov=dbgpt
-
-.PHONY: clean
-clean: ## Clean up the environment
-	rm -rf $(VENV)
-	find . -type f -name '*.pyc' -delete
-	find . -type d -name '__pycache__' -delete
-	find . -type d -name '.pytest_cache' -delete
-	find . -type d -name '.coverage' -delete
-
-.PHONY: help
-help:  ## Display this help screen
-	@echo "Available commands:"
-	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
+all: format typecheck lint
