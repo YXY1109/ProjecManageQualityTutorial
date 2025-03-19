@@ -26,9 +26,7 @@ typecheck:
 
 # 运行测试
 test:
-	$(VENV_SCRIPTS)/pytest -m pytest tests/
+	$(VENV_SCRIPTS)/pytest tests/
 
 # 执行所有检查
 all: format lint typecheck test
-
-.PHONY: help format lint typecheck test all clean
