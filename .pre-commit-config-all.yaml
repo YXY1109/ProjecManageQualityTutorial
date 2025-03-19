@@ -1,0 +1,13 @@
+# Please run command `pre-commit install` to install pre-commit hook
+repos:
+  - repo: local
+    hooks:
+      - id: all
+        name: Python all
+        entry: make all
+        language: system
+        exclude: '^docs/|^tests/'
+        types: [ python ]
+        stages: [ pre-commit ]
+        pass_filenames: false
+        args: [ ]

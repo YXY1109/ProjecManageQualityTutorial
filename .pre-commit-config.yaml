@@ -2,9 +2,36 @@
 repos:
   - repo: local
     hooks:
-      - id: all
-        name: Python all
-        entry: make all
+      - id: format
+        name: 自动整理导入顺序+自动代码格式化
+        entry: make format
+        language: system
+        exclude: '^docs/|^tests/'
+        types: [ python ]
+        stages: [ pre-commit ]
+        pass_filenames: false
+        args: [ ]
+      - id: lint
+        name: 代码风格检查
+        entry: make lint
+        language: system
+        exclude: '^docs/|^tests/'
+        types: [ python ]
+        stages: [ pre-commit ]
+        pass_filenames: false
+        args: [ ]
+      - id: typecheck
+        name: 静态类型检查
+        entry: make typecheck
+        language: system
+        exclude: '^docs/|^tests/'
+        types: [ python ]
+        stages: [ pre-commit ]
+        pass_filenames: false
+        args: [ ]
+      - id: test
+        name: 单元测试
+        entry: make test
         language: system
         exclude: '^docs/|^tests/'
         types: [ python ]
