@@ -2,45 +2,9 @@
 repos:
   - repo: local
     hooks:
-      - id: python-fmt
-        name: Python Format
-        entry: make fmt-check
-        language: system
-        exclude: '^docs/|^tests/'
-        types: [ python ]
-        stages: [ commit ]
-        pass_filenames: false
-        args: [ ]
-      - id: python-test
-        name: Python Unit Test
-        entry: make test
-        language: system
-        exclude: '^docs/|^tests/'
-        types: [ python ]
-        stages: [ commit ]
-        pass_filenames: false
-        args: [ ]
-      - id: python-lint-mypy
-        name: Python Lint mypy
-        entry: make mypy
-        language: system
-        exclude: '^docs/|^tests/'
-        types: [ python ]
-        stages: [ commit ]
-        pass_filenames: false
-        args: [ ]
-      - id: python-flake8
-        name: Python Flake8
-        entry: make flake8
-        language: system
-        exclude: '^docs/|^tests/'
-        types: [ python ]
-        stages: [ commit ]
-        pass_filenames: false
-        args: [ ]
-      - id: python-isort
-        name: Python Isort
-        entry: make isort
+      - id: all
+        name: Python all
+        entry: make all
         language: system
         exclude: '^docs/|^tests/'
         types: [ python ]
