@@ -1,5 +1,5 @@
-# Variables
-SOURCE_DIR = D:/PycharmProjects/ProjecManageQualityTutorial
+# 获取当前目录
+SOURCE_DIR := $(CURDIR)
 VENV_SCRIPTS = $(SOURCE_DIR)/venv/Scripts
 
 help:
