@@ -39,3 +39,10 @@ choco install make
 ### 使用ruff做工程质量管理
 
 > https://github.com/astral-sh/ruff
+
+### makefile异常
+
+问题1：Makefile:44: *** missing separator. Stop
+1：下载插件：Makefile Language
+2：设置四个空格和tab： Editor -> Code Style->Use tab character 选项被勾选。若该选项未被勾选，PyCharm 会默认使用空格来替代
+Tab。

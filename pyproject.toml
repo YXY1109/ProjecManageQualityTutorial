@@ -1,0 +1,29 @@
+[project]
+name = "project_manage_quality_turorial"
+version = "0.0.1"
+description = "学习项目"
+requires-python = ">= 3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["packages"]
+addopts = ["--import-mode=importlib", ]
+python_files = ["test_*.py", "*_test.py"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.format]
+# Format docstrings
+docstring-code-format = true
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.ruff.lint]
+# Enable: eror check, import order
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.isort]
+# Specify the local modules (first-party)
+known-first-party = ["dbgpt", "dbgpt_acc_auto", "dbgpt_client", "dbgpt_ext", "dbgpt_serve", "dbgpt_app"]
