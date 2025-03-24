@@ -1,0 +1,41 @@
+# 基本配置
+[tool.ruff]
+# 每行最大字符数，与 black 配置保持一致
+line-length = 88
+# 排除的文件或目录，与原配置保持一致
+exclude = [
+    ".git",
+    "venv",
+    "docs/",
+    "tests/"
+]
+# 包含的文件类型
+extend-select = ["py"]
+
+# 启用所有规则，根据需要可以调整
+select = ["ALL"]
+# 禁用一些可能不需要的规则
+ignore = [
+    # 可以根据具体需求添加要忽略的规则
+]
+
+# 导入排序配置，替代 isort
+[tool.ruff.isort]
+# 按字母顺序排序导入
+force-sort-within-sections = true
+# 排序顺序
+known-first-party = ["src"]
+# 分组导入
+multi-line = 3
+# 每行导入的最大数量
+lines-after-imports = 1
+
+# 类型检查配置，替代 mypy 部分功能
+[tool.ruff.pylint]
+# 启用类型检查相关规则
+enable = ["typecheck"]
+
+# 代码格式化相关，结合 black 可基本满足格式化需求，这里可以微调
+[tool.ruff.black]
+# 与 black 配置保持一致
+line-length = 88

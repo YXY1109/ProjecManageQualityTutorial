@@ -35,3 +35,22 @@ test:
 
 # 执行所有检查
 all: format lint typecheck test
+
+#=======================================================
+
+# 自动格式化代码
+format-ruff:
+    @echo ===============run ruff format===============
+    $(VENV_SCRIPTS)/ruff format $(SOURCE_DIR)
+    @echo ===============run black===============
+    $(VENV_SCRIPTS)/black --config black.toml $(SOURCE_DIR)
+
+# 代码风格检查
+lint-ruff:
+    @echo ===============run ruff lint===============
+    $(VENV_SCRIPTS)/ruff check $(SOURCE_DIR)
+
+# 静态类型检查
+typecheck-ruff:
+    @echo ===============run ruff typecheck===============
+    $(VENV_SCRIPTS)/ruff check --select=typecheck $(SOURCE_DIR)
