@@ -26,4 +26,4 @@ select = ["E", "F", "I"]
 
 [tool.ruff.lint.isort]
 # Specify the local modules (first-party)
-known-first-party = ["dbgpt", "dbgpt_acc_auto", "dbgpt_client", "dbgpt_ext", "dbgpt_serve", "dbgpt_app"]
+known-first-party = ["src"]
