@@ -12,7 +12,7 @@ VENV_SCRIPTS = $(SOURCE_DIR)/venv/$(VENV_DIR)
 help:
 	@echo "Available commands:"
 	@echo "make format      Automatically format the code(isort + black)"
-	@echo "make flake8        Check the code style(flake8)"
+	@echo "make flake8      Check the code style(flake8)"
 	@echo "make typecheck   Perform static type checking(mypy)"
 	@echo "make test        Run the tests"
 	@echo "make all         Execute all checks (format + lint + typecheck + test)"
