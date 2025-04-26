@@ -11,15 +11,15 @@ VENV_SCRIPTS = $(SOURCE_DIR)/venv/$(VENV_DIR)
 
 help:
 	@echo "Available commands:"
-	@echo "make format      Automatically format the code(isort + black)"
-	@echo "make flake8      Check the code style(flake8)"
-	@echo "make mypy        Perform static type checking(mypy)"
-	@echo "make test        Run the tests"
-	@echo "make all         Execute all checks (format + lint + typecheck + test)"
+	@echo "make isort_black     Automatically format the code(isort + black)"
+	@echo "make flake8          Check the code style(flake8)"
+	@echo "make mypy            Perform static type checking(mypy)"
+	@echo "make test            Run the tests"
+	@echo "make all             Execute all checks (format + lint + typecheck + test)"
 
 
 # 自动格式化代码
-format:
+isort_black:
 	@echo ===============run isort===============
 	$(VENV_SCRIPTS)/isort --settings-file .isort.cfg $(SOURCE_DIR)
 	@echo ===============run black===============
@@ -41,12 +41,12 @@ test:
 	$(VENV_SCRIPTS)/pytest tests/
 
 # 执行所有检查
-all: format flake8 mypy test
+all: isort_black flake8 mypy test
 
 #=======================================================
 
 # 自动格式化代码，直接用ruff还好写
-format-ruff:
+format:
 	@echo ===============run ruff format===============
 	$(VENV_SCRIPTS)/ruff format
 
