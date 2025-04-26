@@ -46,3 +46,8 @@ choco install make
 1：下载插件：Makefile Language
 2：设置四个空格和tab： Editor -> Code Style->Use tab character 选项被勾选。若该选项未被勾选，PyCharm 会默认使用空格来替代
 Tab。
+
+### 命令
+
+ruff format
+ruff check

@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 # 获取项目根目录
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
