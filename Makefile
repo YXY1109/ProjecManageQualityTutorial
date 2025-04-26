@@ -45,12 +45,12 @@ all: format flake8 mypy test
 
 #=======================================================
 
-# 自动格式化代码
+# 自动格式化代码，直接用ruff还好写
 format-ruff:
 	@echo ===============run ruff format===============
 	$(VENV_SCRIPTS)/ruff format
 
 # 代码风格检查
-lint-ruff:
+check:
 	@echo ===============run ruff lint===============
 	$(VENV_SCRIPTS)/ruff check

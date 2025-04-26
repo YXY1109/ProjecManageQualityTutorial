@@ -24,6 +24,10 @@ line-ending = "auto"
 [tool.ruff.lint]
 # Enable: eror check, import order
 select = ["E", "F", "I"]
+ignore = []
+
+fixable = ["ALL"]
+unfixable = []
 
 [tool.ruff.lint.isort]
 # Specify the local modules (first-party)

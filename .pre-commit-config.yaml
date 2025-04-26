@@ -20,9 +20,9 @@ repos:
         stages: [ pre-commit ]
         pass_filenames: false
         args: [ ]
-      - id: typecheck
+      - id: mypy
         name: 静态类型检查
-        entry: make typecheck
+        entry: make mypy
         language: system
         exclude: '^docs/|^tests/'
         types: [ python ]
